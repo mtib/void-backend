@@ -1,11 +1,7 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
-
 val ktor_version = "2.3.12"
 
 plugins {
     kotlin("jvm") version "1.9.23"
-    id("com.gradleup.shadow") version "8.3.0"
     id("io.ktor.plugin") version "2.3.12"
 }
 
@@ -38,16 +34,21 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }
 
-task("fatJar", ShadowJar::class) {
-    archivesName.set("void-backend")
-    archiveClassifier.set("")
-    archiveVersion.set("")
+task("fatJar", Jar::class) {
+    archiveBaseName = "void-backend"
+    archiveClassifier = ""
+    archiveVersion = ""
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes["Main-Class"] = "dev.mtib.void.api.VoidApiKt"
     }
-    from(sourceSets["main"].output)
+    from(
+        sourceSets.main.get().output,
+        configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }
+    )
 }
