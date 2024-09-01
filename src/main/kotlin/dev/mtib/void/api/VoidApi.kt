@@ -1,5 +1,5 @@
 package dev.mtib.void.api
 
 fun main() {
-    println("Hello World!")
+    println("Hello Void!")
 }
