@@ -23,4 +23,5 @@ jobs:
           key: ${{ secrets.KEY }}
           source: "./build/libs/void-backend.jar"
           target: "/root/containers/void"
+          strip_components: 2
           overwrite: true
