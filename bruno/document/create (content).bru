@@ -1,0 +1,25 @@
+meta {
+  name: create (content)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/document?voidId={{exampleVoidId}}
+  body: text
+  auth: none
+}
+
+params:query {
+  voidId: {{exampleVoidId}}
+}
+
+body:text {
+  Some plain text (i.e. unencrypted) created in {{exampleVoidId}} on {{host}}.
+}
+
+script:post-response {
+  const body = res.getBody()
+  bru.setEnvVar("exampleDocumentId",body.documentId)
+  bru.setEnvVar("exampleVoidId",body.voidId)
+}

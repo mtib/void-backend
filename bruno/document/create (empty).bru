@@ -1,0 +1,15 @@
+meta {
+  name: create (empty)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/document?voidId={{exampleVoidId}}
+  body: none
+  auth: none
+}
+
+params:query {
+  voidId: {{exampleVoidId}}
+}

@@ -1,0 +1,19 @@
+meta {
+  name: set metadata
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{host}}/void/{{exampleVoidId}}/metadata
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "wow",
+    "description": "crazy",
+    "color": "#f0f"
+  }
+}

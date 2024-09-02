@@ -1,5 +1,7 @@
 package dev.mtib.void.api
 
+import dev.mtib.void.api.rest.DocumentRoutes
+import dev.mtib.void.api.rest.VoidRoutes
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -24,10 +26,11 @@ object VoidApiServer {
                     json()
                 }
                 routing {
-                    get("/") {
-                        call.respond(mapOf(
-                            "message" to "Hello Void!"
-                        ))
+                    with(VoidRoutes) {
+                        this@embeddedServer.registerVoidRoutes()
+                    }
+                    with(DocumentRoutes){
+                        this@embeddedServer.registerDocumentRoutes()
                     }
                 }
             }
