@@ -26,8 +26,8 @@ object DocumentRoutes {
     }
 
     private fun Route.createDocument() {
-        post {
-            val voidId = VoidId(call.request.queryParameters["voidId"] ?: return@post call.respondText("Missing voidId", status = HttpStatusCode.BadRequest))
+        post("/{voidId}") {
+            val voidId = VoidId(call.parameters["voidId"] ?: return@post call.respondText("Missing voidId", status = HttpStatusCode.BadRequest))
             val documentId = DocumentId.generate()
             val body = call.receive<ByteArray>()
 

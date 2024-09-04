@@ -123,7 +123,9 @@ class FileStorage(
         }
         return voidPath.listDirectoryEntries().sortedBy {
             -Files.readAttributes(it, BasicFileAttributes::class.java).creationTime().toMillis()
-        }.map { DocumentId(it.fileName.toString()) }
+        }.map { it.fileName.toString() }
+            .filter(DocumentId::matchesSchema)
+            .map(::DocumentId)
             .asFlow()
     }
 }

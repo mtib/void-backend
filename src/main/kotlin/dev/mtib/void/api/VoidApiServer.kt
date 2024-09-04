@@ -2,6 +2,7 @@ package dev.mtib.void.api
 
 import dev.mtib.void.api.rest.DocumentRoutes
 import dev.mtib.void.api.rest.VoidRoutes
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -21,6 +22,7 @@ object VoidApiServer {
                 install(StatusPages)
                 install(CORS) {
                     anyHost()
+                    methods.add(HttpMethod.Put)
                 }
                 install(ContentNegotiation) {
                     json()

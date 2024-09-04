@@ -5,17 +5,20 @@ meta {
 }
 
 post {
-  url: {{host}}/document?voidId={{exampleVoidId}}
+  url: {{host}}/document?voidId=v-579eca17c5dcf24e
   body: text
   auth: none
 }
 
 params:query {
-  voidId: {{exampleVoidId}}
+  voidId: v-579eca17c5dcf24e
 }
 
 body:text {
-  Some plain text (i.e. unencrypted) created in {{exampleVoidId}} on {{host}}.
+  # header 2
+  
+  
+  content
 }
 
 script:post-response {
